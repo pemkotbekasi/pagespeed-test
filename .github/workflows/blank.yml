@@ -22,7 +22,6 @@ jobs:
           sudo apt-get update
           sudo apt-get upgrade -y
           sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libnotify-dev libnss3 libxss1 libxtst6 xauth xvfb libgbm-dev
-          sudo apt-get install libappindicator1 fonts-liberation
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb
           sudo apt-get -y install xorg xvfb gtk2-engines-pixbuf
