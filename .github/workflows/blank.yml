@@ -31,6 +31,7 @@ jobs:
           sleep 10
           npm install -g lighthouse
           lighthouse https://www.oxyplug.com/
+          rm -rf *.deb
       - name: Commit
         run: |
           git config --local user.name "github-actions[bot]"
