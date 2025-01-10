@@ -16,8 +16,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Jalankan Skrip
-        env:
-          SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
         run: |
           sudo apt-get update
           sudo apt-get upgrade -y
@@ -45,4 +43,4 @@ jobs:
           force: true
           directory: "."
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }
+          branch: ${{ github.ref }}
