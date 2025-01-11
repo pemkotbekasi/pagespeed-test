@@ -16,7 +16,7 @@ axios.get('https://stat.bekasikota.go.id/status/webmonopd', { maxBodyLength: Inf
       .split(`maintenanceList':`)[0].slice(0, -2).replaceAll(`'`, `"`);
     const result = (JSON.parse(uuu)[0].monitorList);
     const FilesJSON = result.map(d => `lighthouse ${d.url} --output=json --output-path=./json/${GetUrl(d.url)}.json`)
-    const FilesHtml = result.map(d => `lighthouse ${d.url} --output=html --output-path=./json/${GetUrl(d.url)}.html`)
+    const FilesHtml = result.map(d => `lighthouse ${d.url} --output=html --output-path=./html/${GetUrl(d.url)}.html`)
     fs.writeFileSync('outputJSON.sh', FilesJSON.join('\n'));
     fs.writeFileSync('FilesHtml.sh', FilesHtml.join('\n'));
   })
