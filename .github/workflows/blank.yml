@@ -30,7 +30,7 @@ jobs:
           export DISPLAY=:99
           sleep 10
           npm install -g lighthouse
-          lighthouse https://www.oxyplug.com/
+          lighthouse https://www.oxyplug.com/ --output=json
           rm -rf *.deb
       - name: Commit
         run: |
