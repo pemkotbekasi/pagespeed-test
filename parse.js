@@ -5,7 +5,7 @@ function GetUrl(url) {
   try {
     return new URL(url).hostname
   } catch (e) {
-    return 'null'
+    return 'https://github.com/'
   }
 
 }
