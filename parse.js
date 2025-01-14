@@ -5,7 +5,7 @@ function GetUrl(url) {
   try {
     return new URL(url).hostname
   } catch (e) {
-    return 'null'
+    return 'https://rahadiana.github.io/gpr_widget_kominfo/example/optimize.html'
   }
 
 }
