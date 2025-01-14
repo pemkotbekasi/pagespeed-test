@@ -3,7 +3,7 @@ const fs = require('fs');
 
 function GetUrl(url) {
   try {
-    return new URL(url).hostname || 'rahadiana.github.io'
+    return new URL(url||'https://rahadiana.github.io').hostname 
   } catch (e) {
     return 'rahadiana.github.io'
   }
