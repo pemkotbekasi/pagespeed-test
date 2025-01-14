@@ -17,25 +17,25 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Jalankan Skrip
         run: |
-          sudo apt-get update > /dev/null 2>&1 
-          sudo apt-get upgrade -y > /dev/null 2>&1 
-          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libnotify-dev libnss3 libxss1 libxtst6 xauth xvfb libgbm-dev > /dev/null 2>&1 
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb > /dev/null 2>&1 
-          sudo apt-get -y install xorg xvfb gtk2-engines-pixbuf > /dev/null 2>&1 
-          sudo apt-get -y install dbus-x11 xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic xfonts-scalable > /dev/null 2>&1 
-          sudo apt-get -y install imagemagick x11-apps > /dev/null 2>&1 
-          sudo Xvfb -ac :99 -screen 0 1280x1024x16 &
-          sleep 10
-          export DISPLAY=:99
-          sleep 10
+          # sudo apt-get update > /dev/null 2>&1 
+          # sudo apt-get upgrade -y > /dev/null 2>&1 
+          # sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libnotify-dev libnss3 libxss1 libxtst6 xauth xvfb libgbm-dev > /dev/null 2>&1 
+          # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          # sudo dpkg -i google-chrome-stable_current_amd64.deb > /dev/null 2>&1 
+          # sudo apt-get -y install xorg xvfb gtk2-engines-pixbuf > /dev/null 2>&1 
+          # sudo apt-get -y install dbus-x11 xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic xfonts-scalable > /dev/null 2>&1 
+          # sudo apt-get -y install imagemagick x11-apps > /dev/null 2>&1 
+          # sudo Xvfb -ac :99 -screen 0 1280x1024x16 &
+          # sleep 10
+          # export DISPLAY=:99
+          # sleep 10
           npm install -g lighthouse
           npm install axios@1.7.9
           mkdir html
           mkdir json
           node parse.js
-          cat outputJSON.sh | sh
-          cat FilesHtml.sh | sh
+          # cat outputJSON.sh | sh
+          # cat FilesHtml.sh | sh
           rm -rf node_modules/
       - name: Commit
         run: |
