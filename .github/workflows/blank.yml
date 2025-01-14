@@ -34,8 +34,8 @@ jobs:
           mkdir html
           mkdir json
           node parse.js
-          # cat outputJSON.sh | sh
-          # cat FilesHtml.sh | sh
+          cat outputJSON.sh | sh
+          cat FilesHtml.sh | sh
           rm -rf node_modules/
       - name: Commit
         run: |
