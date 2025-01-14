@@ -3,9 +3,7 @@ const fs = require('fs');
 
 function GetUrl(url) {
   try {
-    const FinalUrl = new URL(url).hostname 
-    return FinalUrl  == undefined ? 'https://rahadiana.github.io' : FinalUrl
-    
+    return new URL(url).hostname 
   } catch (e) {
     return 'rahadiana.github.io'
   }
@@ -17,8 +15,8 @@ axios.get('https://stat.bekasikota.go.id/status/webmonopd', { maxBodyLength: Inf
     const uuu = yy.slice(0, -1).split(`publicGroupList':`)[1]
       .split(`maintenanceList':`)[0].slice(0, -2).replaceAll(`'`, `"`);
     const result = (JSON.parse(uuu)[0].monitorList);
-    const FilesJSON = result.map(d => `lighthouse ${d.url} --output=json --output-path=./json/${GetUrl(d.url)}.json`)
-    const FilesHtml = result.map(d => `lighthouse ${d.url} --output=html --output-path=./html/${GetUrl(d.url)}.html`)
+    const FilesJSON = result.map(d => `lighthouse ${d.url == undefined ? 'https://rahadiana.github.io' : d.url } --output=json --output-path=./json/${GetUrl(d.url)}.json`)
+    const FilesHtml = result.map(d => `lighthouse ${d.url == undefined ? 'https://rahadiana.github.io' : d.url} --output=html --output-path=./html/${GetUrl(d.url)}.html`)
     fs.writeFileSync('outputJSON.sh', FilesJSON.join('\n'));
     fs.writeFileSync('FilesHtml.sh', FilesHtml.join('\n'));
   })
