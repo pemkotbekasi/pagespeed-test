@@ -31,8 +31,8 @@ jobs:
           sleep 10
           npm install -g lighthouse
           npm install axios@1.7.9
-          mkdir html
-          mkdir json
+          mkdir -p html
+          mkdir -p json
           node parse.js
           cat outputJSON.sh | sh
           cat FilesHtml.sh | sh
