@@ -48,7 +48,7 @@ function groupReportsByIssue(reports) {
     }
 
     // Process each category
-    for (const categoryKey in data.categories) {
+    for (const categoryKey of Object.keys(data.categories)) {
       if (!groupedByCategory[categoryKey]) {
         continue;
       }
@@ -289,7 +289,7 @@ function generateHtmlReport(groupedData) {
 
   // Add summary cards
   let totalIssues = 0;
-  for (const categoryKey in groupedData) {
+  for (const categoryKey of Object.keys(groupedData)) {
     totalIssues += Object.keys(groupedData[categoryKey].issues).length;
   }
 
@@ -307,7 +307,7 @@ function generateHtmlReport(groupedData) {
 `;
 
   // Generate sections for each category
-  for (const categoryKey in groupedData) {
+  for (const categoryKey of Object.keys(groupedData)) {
     const category = groupedData[categoryKey];
     const issueKeys = Object.keys(category.issues);
     
