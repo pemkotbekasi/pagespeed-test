@@ -3,6 +3,11 @@ const path = require('path');
 
 // Function to read all JSON files from the json directory
 function readJsonFiles(directory) {
+  if (!fs.existsSync(directory)) {
+    console.error(`Directory not found: ${directory}`);
+    return [];
+  }
+  
   const files = fs.readdirSync(directory);
   const jsonFiles = files.filter(file => file.endsWith('.json'));
   
@@ -374,7 +379,7 @@ function generateHtmlReport(groupedData) {
 
 // Main execution
 function main() {
-  const jsonDir = path.join(__dirname, 'json');
+  const jsonDir = process.env.JSON_DIR || path.join(__dirname, 'json');
   
   console.log('Reading JSON files from:', jsonDir);
   const reports = readJsonFiles(jsonDir);
@@ -386,10 +391,14 @@ function main() {
   console.log('Generating HTML report...');
   const html = generateHtmlReport(groupedData);
   
-  const outputPath = path.join(__dirname, 'grouped_report.html');
-  fs.writeFileSync(outputPath, html, 'utf8');
-  
-  console.log(`✓ Grouped report generated: ${outputPath}`);
+  const outputPath = process.env.OUTPUT_PATH || path.join(__dirname, 'grouped_report.html');
+  try {
+    fs.writeFileSync(outputPath, html, 'utf8');
+    console.log(`✓ Grouped report generated: ${outputPath}`);
+  } catch (error) {
+    console.error(`Error writing report file: ${error.message}`);
+    process.exit(1);
+  }
 }
 
 // Run the script
