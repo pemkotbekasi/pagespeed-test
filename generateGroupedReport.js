@@ -106,6 +106,17 @@ function escapeHtml(text) {
     .replace(/'/g, '&#039;');
 }
 
+// Function to validate and sanitize URL
+function sanitizeUrl(url) {
+  if (!url) return '#';
+  // Block dangerous URL schemes
+  const urlLower = url.toLowerCase().trim();
+  if (urlLower.startsWith('javascript:') || urlLower.startsWith('data:') || urlLower.startsWith('vbscript:')) {
+    return '#';
+  }
+  return url;
+}
+
 // Function to generate HTML report
 function generateHtmlReport(groupedData) {
   let html = `<!DOCTYPE html>
@@ -283,7 +294,7 @@ function generateHtmlReport(groupedData) {
   <div class="container">
     <h1>🚀 Lighthouse Grouped Report</h1>
     <div class="meta-info">
-      Generated on ${new Date().toLocaleString()}
+      Generated on ${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC
     </div>
 `;
 
@@ -350,7 +361,7 @@ function generateHtmlReport(groupedData) {
 
           html += `
           <div class="url-item ${scoreClass}">
-            <a href="${escapeHtml(urlData.url)}" class="url-link" target="_blank">${escapeHtml(urlData.url)}</a>
+            <a href="${escapeHtml(sanitizeUrl(urlData.url))}" class="url-link" target="_blank">${escapeHtml(urlData.url)}</a>
             ${urlData.score !== 'N/A' ? `<span class="score-badge ${badgeClass}">Score: ${urlData.score}</span>` : ''}
             ${urlData.displayValue ? `<span class="display-value">${escapeHtml(urlData.displayValue)}</span>` : ''}
           </div>
@@ -406,4 +417,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { readJsonFiles, groupReportsByIssue, generateHtmlReport };
+module.exports = { readJsonFiles, groupReportsByIssue, generateHtmlReport, sanitizeUrl, escapeHtml };
