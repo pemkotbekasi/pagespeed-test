@@ -111,7 +111,10 @@ function sanitizeUrl(url) {
   if (!url) return '#';
   // Block dangerous URL schemes
   const urlLower = url.toLowerCase().trim();
-  if (urlLower.startsWith('javascript:') || urlLower.startsWith('data:') || urlLower.startsWith('vbscript:')) {
+  if (urlLower.startsWith('javascript:') || 
+      urlLower.startsWith('data:') || 
+      urlLower.startsWith('vbscript:') || 
+      urlLower.startsWith('file:')) {
     return '#';
   }
   return url;
@@ -294,13 +297,14 @@ function generateHtmlReport(groupedData) {
   <div class="container">
     <h1>🚀 Lighthouse Grouped Report</h1>
     <div class="meta-info">
-      Generated on ${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC
+      Generated on ${new Date().toISOString().slice(0, 19).replace('T', ' ')} UTC
     </div>
 `;
 
   // Add summary cards
+  const categoryKeys = Object.keys(groupedData);
   let totalIssues = 0;
-  for (const categoryKey of Object.keys(groupedData)) {
+  for (const categoryKey of categoryKeys) {
     totalIssues += Object.keys(groupedData[categoryKey].issues).length;
   }
 
@@ -308,7 +312,7 @@ function generateHtmlReport(groupedData) {
     <div class="summary">
       <div class="summary-card">
         <h3>Total Categories</h3>
-        <div class="count">${Object.keys(groupedData).length}</div>
+        <div class="count">${categoryKeys.length}</div>
       </div>
       <div class="summary-card">
         <h3>Total Issues</h3>
@@ -318,7 +322,7 @@ function generateHtmlReport(groupedData) {
 `;
 
   // Generate sections for each category
-  for (const categoryKey of Object.keys(groupedData)) {
+  for (const categoryKey of categoryKeys) {
     const category = groupedData[categoryKey];
     const issueKeys = Object.keys(category.issues);
     
