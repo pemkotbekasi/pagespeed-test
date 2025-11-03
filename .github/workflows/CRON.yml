@@ -40,6 +40,7 @@ jobs:
           node parse.js
           cat outputJSON.sh | sh
           cat FilesHtml.sh | sh
+          node generateGroupedReport.js
       - name: Commit
         run: |
           git config --local user.name "github-actions[bot]"
